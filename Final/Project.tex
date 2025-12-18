@@ -1,0 +1,103 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[T1]{fontenc}
+\usepackage{gensymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lmodern}
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{natbib}
+\author{Project Proposal}
+\date{Zihan Ma 20238181}
+\title{IE801 Logistics Systems Optimization}
+\begin{document}
+
+\maketitle
+\section{Introduction}
+The Traveling Salesman Problem with Job-times (TSPJ) is a hybrid problem that inherits properties from both the Traveling Salesman Problem(TSP) and the Scheduling Problem. TSPJ is a route optimization problem where a traveler must visit all nodes and each node exactly once and then return to the origin. Also, it inherits the scheduling properties when minimizing the completion time of the jobs.
+
+In the paper \cite{MOSAYEBI2021105226}, the authors give a mathematical model for TSPJ. Efficient heuristics for the solution are required for solving large problems, and four heuristic procedures are proposed, which are based on the TSPJ-nearest neighbor(NN) heuristic, reverse assignment, TSPJ-2-opt, and local search improvement(LSI). These heuristics employ local search improvement techniques, which were developed specifically for the TSPJ, to enhance the solutions initially constructed by heuristics similar to the nearest neighbor method used in solving TSP.
+
+The data and code in GAMS language has been provided in \url{https://github.com/TSPJLIB/TSPJ}. 
+
+\section{Implementation Plan}
+I plan to use Python to implement the Heuristic algorithm, and to compare the results shown in the original paper, including the execution time, the number of successes and so on. I'm going to use Gurobi or CPLEX in python, and other necessary libraries. 
+
+The expected timelines are as follows. I will spend a week reading articles in great detail, understanding every aspect of the algorithm. After that, I will spend about two weeks reading the example code provided by the authors and setting up a rough code framework. Then, I will spend approximately two weeks completing my own implementation. Finally, I will use one week to organize the project report and prepare for the final presentation. 
+
+
+
+
+
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of LSI and GAMS}
+\begin{tabular}{llcccccccccc}
+\toprule
+\textbf{Name} & \multicolumn{3}{c}{\textbf{LSI}} & & \multicolumn{5}{c}{\textbf{GAMS}} \\
+\cmidrule{3-4} \cmidrule{5-6} \cmidrule{7-10}
+& \textbf{Proc.} & \textbf{$C_{\max}$} & \textbf{Sec}  & \textbf{$C_{\max}$} & \textbf{Sec}  & \textbf{$C_{\max}$} & \textbf{LB} & \textbf{Abs} & \textbf{Rel} & \textbf{Sec} & \textbf{Gap \%} \\
+\midrule
+gr17-J & I & 2760.0 & 0.13 & & 2760.0 & 2760.0 & 0.0 & 0.0 & 0.52 & 0.0 \\
+& II & 2991.0 & 0.13 & & 2760.0 & 2760.0 & 0.0 & 0.0 & 0.52 & 8.27 \\
+& III & 2760.0 & 0.19 & & 2760.0 & 2760.0 & 0.0 & 0.0 & 0.52 & 0.0 \\
+& IV & 2760.0 & 0.15 & & 2760.0 & 2760.0 & 0.0 & 0.0 & 0.52 & 0.0 \\
+gr21-J & I & 7956.0 & 0.21 & & 7888.0 & 7712.0 & 75.99 & 0.0096 & 0.80 & 2.216 \\
+& II & 8428.0 & 0.21 & & 7888.0 & 7712.0 & 75.99 & 0.0096 & 0.80 & 8.22 \\
+& III & 7962.0 & 0.27 & & 7888.0 & 7712.0 & 75.99 & 0.0096 & 0.80 & 2.23 \\
+& IV & 7962.0 & 0.21 & & 7888.0 & 7712.0 & 75.99 & 0.0096 & 0.80 & 2.23 \\
+gr24-J & I & 1818.0 & 0.36 & & 1806.0 & 1802.0 & 3.99 & 0.0022 & 0.148 & 0.66 \\
+& II & 1927.0 & 0.21 & & 1806.0 & 1802.0 & 3.99 & 0.0022 & 0.148 & 6.7 \\
+& III & 1818.0 & 0.47 & & 1806.0 & 1802.0 & 3.99 & 0.0022 & 0.148 & 0.66 \\
+& IV & 1853.0 & 0.34 & & 1806.0 & 1802.0 & 3.99 & 0.0022 & 0.148 & 2.6 \\
+fri26-J & I & 1326.0 & 0.22 & & 1283.0 & 1282.94 & 0.063 & 0.0004 & 1.27 & 3.35 \\
+& II & 1326.0 & 0.27 & & 1283.0 & 1282.94 & 0.063 & 0.0004 & 1.27 & 3.35 \\
+& III & 1326.0 & 0.35 & & 1283.0 & 1282.94 & 0.063 & 0.0004 & 1.27 & 3.35 \\
+& IV & 1326.0 & 0.41 & & 1283.0 & 1282.94 & 0.063 & 0.0004 & 1.27 & 3.35 \\
+bays29-J & I & 2978.0 & 0.29 & & 2937.0 & 2892.88 & 29.123 & 0.01 & 4.44 & 1.4 \\
+& II & 2943.0 & 0.35 & & 2937.0 & 2892.88 & 29.123 & 0.01 & 4.44 & 0.2 \\
+& III & 2940.0 & 0.57 & & 2937.0 & 2892.88 & 29.123 & 0.01 & 4.44 & 0.1 \\
+& IV & 2962.0 & 0.6 & & 2937.0 & 2892.88 & 29.123 & 0.01 & 4.44 & 0.85 \\
+gr48-J & I & 7692.0 & 0.89 & & 7288.0 & 7215.36 & 72.64 & 0.01 & 13.63 & 5.54 \\
+& II & 7499.0 & 2.48 & & 7288.0 & 7215.36 & 72.64 & 0.01 & 13.63 & 2.9 \\
+& III & 7692.0 & 1.36 & & 7288.0 & 7215.36 & 72.64 & 0.01 & 13.63 & 5.54 \\
+& IV & 7630.0 & 1.23 & & 7288.0 & 7215.36 & 72.64 & 0.01 & 13.63 & 4.69 \\
+eli51-J & I & 648.71 & 3.86 & & 630.0 & 627.94 & 2.13 & 0.0034 & 13.17 & 2.297 \\
+& II & 651.0 & 3.3 & & 630.0 & 627.94 & 2.13 & 0.0034 & 13.17 & 3.33 \\
+& III & 648.71 & 5.9 & & 630.0 & 627.94 & 2.13 & 0.0034 & 13.17 & 2.97 \\
+& IV & 640.2 & 5.69 & & 630.0 & 627.94 & 2.13 & 0.0034 & 13.17 & 1.62 \\
+berlin52-J & I & 11230.49 & 0.96 & & 11087 & 10976.96 & 110.54 & 0.0098 & 13.72 & 1.29 \\
+& II & 11362.0 & 1.05 & & 11087 & 10976.96 & 110.54 & 0.0098 & 13.72 & 2.48 \\
+& III & 11225.77 & 1.41 & & 11087 & 10976.96 & 110.54 & 0.0098 & 13.72 & 1.25 \\
+& IV & 11427.66 & 2.3 & & 11087 & 10976.96 & 110.54 & 0.0098 & 13.72 & 3.07 \\
+eli76-J & I & 847.99 & 1.68 & & 802.0 & 799.47 & 2.796 & 0.0035 & 213.53 & 5.73 \\
+& II & 845.0 & 2.61 & & 802.0 & 799.47 & 2.796 & 0.0035 & 213.53 & 5.36 \\
+& III & 847.65 & 2.05 & & 802.0 & 799.47 & 2.796 & 0.0035 & 213.53 & 5.69 \\
+& IV & 822.46 & 3.32 & & 802.0 & 799.47 & 2.796 & 0.0035 & 213.53 & 2.55 \\
+eli101-J & I & 975.94 & 14.75 & & 947.4 & 940.59 & 6.82 & 0.0072 & 999.34 & 3.01 \\
+& II & 1003.0 & 13.83 & & 947.4 & 940.59 & 6.82 & 0.0072 & 999.34 & 5.87 \\
+& III & 975.94 & 22.52 & & 947.4 & 940.59 & 6.82 & 0.0072 & 999.34 & 3.01 \\
+& IV & 998.92 & 28.37 & & 947.4 & 940.59 & 6.82 & 0.0072 & 999.34 & 5.44 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}
